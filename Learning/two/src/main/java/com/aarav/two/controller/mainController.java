@@ -10,4 +10,10 @@ public class mainController {
         System.out.println("This is home page");
         return "home";
     }
+
+    @RequestMapping("/contact")
+    public String contact() {
+        System.out.println("Entered the contact page");
+        return "contact";
+    }
 }
