@@ -1,0 +1,13 @@
+package com.aarav.bootjpa_eg;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class BootjpaEgApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
