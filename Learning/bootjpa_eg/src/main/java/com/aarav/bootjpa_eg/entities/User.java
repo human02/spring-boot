@@ -14,7 +14,7 @@ public class User {
 
     private String name;
     private String city;
-    private String address;
+    private String state;
 
     public int getId() {
         return id;
@@ -40,20 +40,20 @@ public class User {
         this.city = city;
     }
 
-    public String getAddress() {
-        return address;
+    public String getState() {
+        return state;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setState(String state) {
+        this.state = state;
     }
 
-    public User(int id, String name, String city, String address) {
+    public User(int id, String name, String city, String state) {
         super();
         this.id = id;
         this.name = name;
         this.city = city;
-        this.address = address;
+        this.state = state;
     }
 
     public User() {
@@ -62,7 +62,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User [address=" + address + ", city=" + city + ", id=" + id + ", name=" + name + "]";
+        return "User => [state = " + state + ", city = " + city + ", id = " + id + ", name = " + name + "]";
     }
 
 }
