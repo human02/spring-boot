@@ -25,6 +25,17 @@ public class BootjpaEgApplication {
 		// Saving it to the database
 		User result1 = userRepo.save(user);
 		System.out.println("\n\n" + result1 + "\n\n" + "Completed" + "\n");
+
+		// Delete an entry from the table using 'id'
+		System.out.println("\n Please enter a valid id :\t");
+		int deleteID = Integer.parseInt(System.console().readLine());
+		try {
+			userRepo.deleteById(deleteID);
+			System.out.println("Sucessfully deleted entry with ID = " + deleteID);
+		} catch (Exception e) {
+			System.out.println("Please enter correct ID, your ID is incorrect\n\n");
+		}
+
 	}
 
 }
