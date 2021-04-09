@@ -1,5 +1,8 @@
 package com.aarav.bootjpa_eg;
 
+import java.io.IOException;
+
+import java.util.Optional;
 import com.aarav.bootjpa_eg.dao.UserRepository;
 import com.aarav.bootjpa_eg.entities.User;
 
@@ -10,30 +13,127 @@ import org.springframework.context.ApplicationContext;
 @SpringBootApplication
 public class BootjpaEgApplication {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		// Required to the get a bean
 		ApplicationContext context = SpringApplication.run(BootjpaEgApplication.class, args);
 		// Required to call our bean
 		UserRepository userRepo = context.getBean(UserRepository.class);
+		boolean tillWhen = true;
 
-		// Creating a user that will be added to the database
 		User user = new User();
-		user.setName("John");
-		user.setCity("North Pole");
-		user.setAddress("Arctic");
+		while (tillWhen) {
+			System.out.println("\n*************************\nWelcome\n\nChoose an option\n");
+			System.out
+					.println("1 - Create\n2 - Read\n3 - Read All\n4 - Update\n5 - Delete\n6 - Delete All\n0 - Exit\n");
+			int choice = Integer.parseInt(System.console().readLine());
 
-		// Saving it to the database
-		User result1 = userRepo.save(user);
-		System.out.println("\n\n" + result1 + "\n\n" + "Completed" + "\n");
+			switch (choice) {
+			case 1:
+				// Insert a single user in the table.
+				System.out.print("Enter name: - \t");
+				String name = System.console().readLine();
+				System.out.print("Enter city: - \t");
+				String city = System.console().readLine();
+				System.out.print("Enter state: -  ");
+				String add = System.console().readLine();
 
-		// Delete an entry from the table using 'id'
-		System.out.println("\n Please enter a valid id :\t");
-		int deleteID = Integer.parseInt(System.console().readLine());
-		try {
-			userRepo.deleteById(deleteID);
-			System.out.println("Sucessfully deleted entry with ID = " + deleteID);
-		} catch (Exception e) {
-			System.out.println("Please enter correct ID, your ID is incorrect\n\n");
+				user.setName(name);
+				user.setCity(city);
+				user.setState(add);
+				try {
+					User result1 = userRepo.save(user);
+					System.out.println("\nSuccessfully added.\nID assocaited with this user = " + result1.getId());
+				} catch (Exception e) {
+					System.out.println("Please enter correct ID, your ID is incorrect\n");
+				}
+				break;
+
+			case 2:
+				// Reading the value associated with an ID.
+				try {
+					System.out.print("\nPlease enter a valid id : ");
+					int findID = Integer.parseInt(System.console().readLine());
+					Optional<User> foundUser = userRepo.findById(findID);
+					if (foundUser.isEmpty() == false) {
+						System.out.println("Sucessfully found the entry:\n\t" + foundUser);
+					} else {
+						System.out.println(
+								"No record present that is associated with this ID, please try a different ID. ");
+					}
+
+				} catch (Exception e) {
+					System.out.println("No such entry present.\n");
+				}
+				break;
+
+			case 3:
+				// Reading all the entries of the table.
+				try {
+					System.out.println("\nAll the entries are as follows: ");
+					Iterable<User> foundUser = userRepo.findAll();
+					for (User eachUser : foundUser) {
+						System.out.println("   " + eachUser.toString());
+					}
+				} catch (Exception e) {
+					System.out.println("No entry present.\n");
+				}
+				break;
+
+			case 4:
+				// Update a single user entry in the table.
+				System.out.print("Enter the ID associated to which you want to update the data: -  ");
+				int updateID = Integer.parseInt(System.console().readLine());
+				Optional<User> foundUser = userRepo.findById(updateID); // Getting the same object to overwrite.
+				User userUpdate = new User();
+				userUpdate = foundUser.get();
+				System.out.print("Enter name: - \t");
+				String newName = System.console().readLine();
+				System.out.print("Enter city: - \t");
+				String newCity = System.console().readLine();
+				System.out.print("Enter state: -  ");
+				String newAdd = System.console().readLine();
+
+				userUpdate.setName(newName);
+				userUpdate.setCity(newCity);
+				userUpdate.setState(newAdd);
+				try {
+					User result1 = userRepo.save(userUpdate);
+					System.out.println("\nSuccessfully added.\nID assocaited with this user = " + result1.getId());
+				} catch (Exception e) {
+					System.out.println("Please enter correct ID, your ID is incorrect\n");
+				}
+				break;
+
+			case 5:
+				// Delete an entry from the table using 'id'.
+				System.out.print("\nPlease enter a valid id : ");
+				int deleteID = Integer.parseInt(System.console().readLine());
+				try {
+					userRepo.deleteById(deleteID);
+					System.out.println("Sucessfully deleted entry with ID = " + deleteID);
+				} catch (Exception e) {
+					System.out.println("Please enter correct ID, your ID is incorrect\n");
+				}
+				break;
+
+			case 6:
+				// Deleting All the entries at once.
+				try {
+					userRepo.deleteAll();
+					System.out.println("Sucessfully deleted all entries\n");
+				} catch (Exception e) {
+					System.out.println("No entry present to delete\n\n");
+				}
+				break;
+
+			case 0:
+				System.out.println("\nExit Initiated..\nThank You for using the application, Until next time!!\n");
+				tillWhen = false;
+				break;
+
+			default:
+				break;
+			}
 		}
 
 	}
