@@ -26,6 +26,9 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 
     public List<User> findByCityAndState(String city, String state);
 
-    public List<User> findByNameStartingWith(String letter);
+    public List<User> findByNameStartingWith(String prefix);
 
+    public List<User> findByNameEndingingWith(String suffix);
+
+    public List<User> findByNameContaining(String words);
 }
