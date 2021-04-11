@@ -1,7 +1,7 @@
 package com.aarav.bootjpa_eg;
 
 import java.io.IOException;
-
+import java.util.List;
 import java.util.Optional;
 import com.aarav.bootjpa_eg.dao.UserRepository;
 import com.aarav.bootjpa_eg.entities.User;
@@ -20,17 +20,17 @@ public class BootjpaEgApplication {
 		UserRepository userRepo = context.getBean(UserRepository.class);
 		boolean tillWhen = true;
 
-		User user = new User();
 		while (tillWhen) {
-			System.out.println("\n*************************\nWelcome\n\nChoose an option\n");
-			System.out
-					.println("1 - Create\n2 - Read\n3 - Read All\n4 - Update\n5 - Delete\n6 - Delete All\n0 - Exit\n");
+			System.out.println("\n*************----- Welcome to CLI -----*************\n\nChoose an option\n");
+			System.out.print(
+					"1 - Create\n2 - Read\n3 - Read All\n4 - Update\n5 - Delete\n6 - Delete All\n7 - Find by Name\n8 - Find by City\n9 - Find by State\n0 - Exit\n\n---> ");
 			int choice = Integer.parseInt(System.console().readLine());
-
+			// If we put it before while then the entry keep on getting overwritten.
+			User user = new User();
 			switch (choice) {
 			case 1:
 				// Insert a single user in the table.
-				System.out.print("Enter name: - \t");
+				System.out.print("\nEnter name: - \t");
 				String name = System.console().readLine();
 				System.out.print("Enter city: - \t");
 				String city = System.console().readLine();
@@ -126,8 +126,69 @@ public class BootjpaEgApplication {
 				}
 				break;
 
+			case 7:
+				// Reading the value(s) associated with a name.
+				try {
+					System.out.print("\nPlease enter a valid name : ");
+					String findName7 = System.console().readLine();
+					List<User> foundUser7 = userRepo.findByName(findName7);
+					if (foundUser7.isEmpty() == false) {
+
+						System.out.println("Sucessfully found the entry:\n");
+						foundUser7.forEach(eachUser7 -> System.out.println(eachUser7));
+					} else {
+						System.out.println(
+								"No record present that is associated with this name, please try a different name. ");
+					}
+
+				} catch (Exception e) {
+					System.out.println("No such entry present.\n");
+				}
+				break;
+
+			case 8:
+				// Reading the value(s) associated with a city.
+				try {
+					System.out.print("\nPlease enter a valid city : ");
+					String findCity8 = System.console().readLine();
+					List<User> foundUser8 = userRepo.findByCity(findCity8);
+					if (foundUser8.isEmpty() == false) {
+
+						System.out.println("Sucessfully found the entry:\n");
+						foundUser8.forEach(eachUser8 -> System.out.println(eachUser8));
+					} else {
+						System.out.println(
+								"No record present that is associated with this city, please try a different city. ");
+					}
+
+				} catch (Exception e) {
+					System.out.println("No such entry present.\n");
+				}
+				break;
+
+			case 9:
+				// Reading the value(s) associated with a state.
+				try {
+					System.out.print("\nPlease enter a valid state : ");
+					String findState9 = System.console().readLine();
+					List<User> foundUser9 = userRepo.findByState(findState9);
+					if (foundUser9.isEmpty() == false) {
+
+						System.out.println("Sucessfully found the entry:\n");
+						foundUser9.forEach(eachUser9 -> System.out.println(eachUser9));
+					} else {
+						System.out.println(
+								"No record present that is associated with this state, please try a different state. ");
+					}
+
+				} catch (Exception e) {
+					System.out.println("No such entry present.\n");
+				}
+				break;
+
 			case 0:
-				System.out.println("\nExit Initiated..\nThank You for using the application, Until next time!!\n");
+				System.out.println(
+						"\nExit Initiated..\nThank You for using the application, Until next time!!\n************------------------------------************\n");
 				tillWhen = false;
 				break;
 
