@@ -23,7 +23,7 @@ public class BootjpaEgApplication {
 		while (tillWhen) {
 			System.out.println("\n*************----- Welcome to CLI -----*************\n\nChoose an option\n");
 			System.out.print(
-					"1 - Create\n2 - Read\n3 - Read All\n4 - Update\n5 - Delete\n6 - Delete All\n7 - Find by Name\n8 - Find by City\n9 - Find by State\n0 - Exit\n\n---> ");
+					"1  - Create\n2  - Read\n3  - Read All\n4  - Update\n5  - Delete\n6  - Delete All\n7  - Find by Name\n8  - Find by City\n9  - Find by State\n10 - Find by City or State\n11 - Find by City and State\n12 - Find all entries whose name starts with\n0  - Exit\n\n---> ");
 			int choice = Integer.parseInt(System.console().readLine());
 			// If we put it before while then the entry keep on getting overwritten.
 			User user = new User();
@@ -185,7 +185,69 @@ public class BootjpaEgApplication {
 					System.out.println("No such entry present.\n");
 				}
 				break;
+			case 10:
+				// Reading the value(s) associated with a state or city.
+				try {
+					System.out.print("\nPlease enter a valid state : ");
+					String findState10 = System.console().readLine();
+					System.out.print("\nPlease enter a valid city : ");
+					String findCity10 = System.console().readLine();
+					List<User> foundUser10 = userRepo.findByCityOrState(findCity10, findState10);
+					if (foundUser10.isEmpty() == false) {
 
+						System.out.println("Sucessfully found the entry:\n");
+						foundUser10.forEach(eachUser10 -> System.out.println(eachUser10));
+					} else {
+						System.out.println(
+								"No record present that is associated with such inputs, please try with different inputs. ");
+					}
+
+				} catch (Exception e) {
+					System.out.println("No such entry present.\n");
+				}
+				break;
+
+			case 11:
+				// Reading the value(s) associated with a state and city.
+				try {
+					System.out.print("\nPlease enter a valid state : ");
+					String findState11 = System.console().readLine();
+					System.out.print("\nPlease enter a valid city : ");
+					String findCity11 = System.console().readLine();
+					List<User> foundUser11 = userRepo.findByCityAndState(findCity11, findState11);
+					if (foundUser11.isEmpty() == false) {
+
+						System.out.println("Sucessfully found the entry:\n");
+						foundUser11.forEach(eachUser11 -> System.out.println(eachUser11));
+					} else {
+						System.out.println(
+								"No record present that is associated with such inputs, please try with different inputs. ");
+					}
+
+				} catch (Exception e) {
+					System.out.println("No such entry present.\n");
+				}
+				break;
+
+			case 12:
+				// Reading the value(s) associated with a name prefix.
+				try {
+					System.out.print("\nPlease enter a valid name-prefix : ");
+					String findPrefixName12 = System.console().readLine();
+					List<User> foundUser12 = userRepo.findByNameStartingWith(findPrefixName12);
+					if (foundUser12.isEmpty() == false) {
+
+						System.out.println("Sucessfully found the entry:\n");
+						foundUser12.forEach(eachUser12 -> System.out.println(eachUser12));
+					} else {
+						System.out.println(
+								"No record present that is associated with such inputs, please try with different inputs. ");
+					}
+
+				} catch (Exception e) {
+					System.out.println("No such entry present.\n");
+				}
+				break;
 			case 0:
 				System.out.println(
 						"\nExit Initiated..\nThank You for using the application, Until next time!!\n************------------------------------************\n");

@@ -20,4 +20,12 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 
     public List<User> findByState(String name);
 
+    // To use 2 or more parameters pls refer the documentation:
+    // https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods
+    public List<User> findByCityOrState(String city, String state);
+
+    public List<User> findByCityAndState(String city, String state);
+
+    public List<User> findByNameStartingWith(String letter);
+
 }
