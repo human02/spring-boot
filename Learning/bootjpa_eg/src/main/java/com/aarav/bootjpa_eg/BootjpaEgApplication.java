@@ -267,6 +267,23 @@ public class BootjpaEgApplication {
 					System.out.println("No such entry present.\n");
 				}
 				break;
+			case 14:
+				// Reading the value(s) associated with a name prefix.
+				try {
+					List<User> foundUser14 = userRepo.getAll();
+					if (foundUser14.isEmpty() == false) {
+
+						System.out.println("Sucessfully found the entry:\n");
+						foundUser14.forEach(eachUser14 -> System.out.println(eachUser14));
+					} else {
+						System.out.println(
+								"No record present that is associated with such inputs, please try with different inputs. ");
+					}
+
+				} catch (Exception e) {
+					System.out.println("No such entry present.\n");
+				}
+				break;
 			case 0:
 				System.out.println(
 						"\nExit Initiated..\nThank You for using the application, Until next time!!\n************------------------------------************\n");

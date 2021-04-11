@@ -45,4 +45,8 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     @Query("select u From User u WHERE u.name =:n")
     public List<User> getByName(@Param("n") String pickedName);
 
+    // This is a native query
+    @Query(value = "select * from user", nativeQuery = true)
+    public List<User> getAll();
+
 }
