@@ -45,6 +45,9 @@ public class Book {
         this.year = year;
     }
 
+    public Book() {
+    }
+
     @Override
     public String toString() {
         return "Book [author=" + author + ", cost=" + cost + ", title=" + title + ", year=" + year + "]";
