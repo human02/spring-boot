@@ -1,6 +1,7 @@
 package com.example.books_restapi.entities;
 
 public class Book {
+    private int ID;
     private String title;
     private String author;
     private double cost;
@@ -38,19 +39,28 @@ public class Book {
         this.year = year;
     }
 
-    public Book(String title, String author, double cost, int year) {
+    public Book() {
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int iD) {
+        ID = iD;
+    }
+
+    public Book(int iD, String title, String author, double cost, int year) {
+        ID = iD;
         this.title = title;
         this.author = author;
         this.cost = cost;
         this.year = year;
     }
 
-    public Book() {
-    }
-
     @Override
     public String toString() {
-        return "Book [author=" + author + ", cost=" + cost + ", title=" + title + ", year=" + year + "]";
+        return "Book [ID=" + ID + ", author=" + author + ", cost=" + cost + ", title=" + title + ", year=" + year + "]";
     }
 
 }
