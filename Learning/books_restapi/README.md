@@ -14,3 +14,7 @@ POSTMAN Screenshots are below:
 #### 3) This screenshot shows ```/books``` output.
 ![image](https://user-images.githubusercontent.com/42168454/114473580-6323c900-9ba9-11eb-9fbc-f63555bbd83a.png)
 
+#
+#### 4) This screenshot shows ***Post***```/book``` input and output.
+![image](https://user-images.githubusercontent.com/42168454/114489619-4ba80880-9bc8-11eb-84eb-d5bfe5c0e631.png)
+
