@@ -6,12 +6,11 @@ import com.example.books_restapi.entities.Book;
 import com.example.books_restapi.services.BookService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController // This is required for JSON data return
@@ -57,4 +56,17 @@ public class TestController {
         // BookService bookService = new BookService();
         return this.bookService.getBookByID(id);
     }
+
+    @PostMapping("/book")
+    public Book addSingleBook(@RequestBody Book b) {
+        this.bookService.addBook(b);
+        return b;
+    }
+
+    @DeleteMapping("/book/{bookID}")
+    public List deleteBook(@PathVariable("bookID") int ID) {
+        this.bookService.deleteBookByID(ID);
+        return this.bookService.getAllBooks();
+    }
+
 }
