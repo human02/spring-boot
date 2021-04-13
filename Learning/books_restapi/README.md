@@ -31,3 +31,17 @@ POSTMAN Screenshots are below:
 ![image](https://user-images.githubusercontent.com/42168454/114494026-772ef100-9bd0-11eb-904f-abec31d9a081.png)
 ![image](https://user-images.githubusercontent.com/42168454/114494065-84e47680-9bd0-11eb-8929-7295a7f4dbdf.png)
 
+#
+#### 7) These screenshots shows proper status codes for different situations.
+- _When no Book is present in database:_
+
+![image](https://user-images.githubusercontent.com/42168454/114566421-1979c380-9c27-11eb-9d0a-1143bc66529e.png)
+
+- _When no Book is present in database with an ID (110):_
+
+![image](https://user-images.githubusercontent.com/42168454/114571299-695a8980-9c2b-11eb-96bb-87f3c3d859a2.png)
+
+- _When no Book with ID - 15545 is present in database to delete:_
+
+![image](https://user-images.githubusercontent.com/42168454/114602095-12fd4300-9c4b-11eb-82e6-ebd73cfa21f1.png)
+
