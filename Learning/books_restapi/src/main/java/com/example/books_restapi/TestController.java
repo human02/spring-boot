@@ -1,11 +1,14 @@
 package com.example.books_restapi;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.example.books_restapi.entities.Book;
 import com.example.books_restapi.services.BookService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,37 +46,79 @@ public class TestController {
         // return ("Hi test is a success - " + (50 + 16));
     }
 
+    // Get all books handler
     @GetMapping("/books")
-    public List books() {
+    // Response Entity is used to send correct status code.
+    public ResponseEntity<List<Book>> books() {
         // In order to use the class and its function, we have to create it object
         // manually which is cumbersome. Like stated below:
         // BookService bookService = new BookService();
 
-        return this.bookService.getAllBooks();
+        List<Book> l = this.bookService.getAllBooks();
+        if (l.size() <= 0) {
+            System.out.println("\nNo Books Found\n");
+            // status - is a static method of Response Entity
+            // build - is neccessary to build new object
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        // this is how 'l' list is sent in response entity.
+        return ResponseEntity.of(Optional.of(l));
+
     }
 
+    // Single book handler
     @GetMapping("/book/{n}") // n is the input
-    public Book SingleBook(@PathVariable("n") int id) {
+    public ResponseEntity<Book> SingleBook(@PathVariable("n") int id) {
         // BookService bookService = new BookService();
-        return this.bookService.getBookByID(id);
+
+        Book b = this.bookService.getBookByID(id);
+
+        if (b == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.of(Optional.of(b));
     }
 
     @PostMapping("/book")
-    public Book addSingleBook(@RequestBody Book b) {
-        this.bookService.addBook(b);
-        return b;
+    // put the return type of the service function like 'boolean' mentioned below
+    public ResponseEntity<Boolean> addSingleBook(@RequestBody Book b) {
+        try {
+            this.bookService.addBook(b);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+
+        }
     }
 
+    // delete handler
     @DeleteMapping("/book/{bookID}")
-    public List deleteBook(@PathVariable("bookID") int ID) {
-        this.bookService.deleteBookByID(ID);
-        return this.bookService.getAllBooks();
+    // '?' can be used for generic, 'Void' can be used fro void return types.
+    public ResponseEntity<?> deleteBook(@PathVariable("bookID") int ID) {
+        try {
+            boolean status = this.bookService.deleteBookByID(ID);
+            if (status) {
+                return ResponseEntity.ok().build();
+            }
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
+    // update handler
     @PutMapping(value = "book/{id}")
-    public void updateBook(@PathVariable("id") int id, @RequestBody Book b) {
+    public ResponseEntity<?> updateBook(@PathVariable("id") int id, @RequestBody Book b) {
+        try {
+            this.bookService.updateBookByID(id, b);
+            return ResponseEntity.ok().build();
 
-        this.bookService.updateBookByID(id, b);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
 }

@@ -30,26 +30,38 @@ public class BookService {
     // get book by Id
     public Book getBookByID(int ID) {
         Book book = null;
-        book = (Book) booksList.stream().filter(e -> e.getID() == ID).findFirst().get();
+        try {
+            book = (Book) booksList.stream().filter(e -> e.getID() == ID).findFirst().get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return book;
     }
 
     // adds a book to the database(here it is a list).
-    public void addBook(Book b) {
-        booksList.add(b);
-        System.out.println(booksList);
+    public boolean addBook(Book b) {
+
+        return booksList.add(b);
+
     }
 
     // delete book by ID
-    public void deleteBookByID(int ID) {
+    public boolean deleteBookByID(int ID) {
         // foreach loop logic could have been used but I used streams instead.
         // here we are overwriting the existing list by removing the object with
         // matching ID.
+        int n = booksList.size();
         booksList = booksList.stream().filter(e -> e.getID() != ID).collect(Collectors.toList());
+        if (n == booksList.size()) {
+            return false;
+        }
+        return true;
     }
 
     // update book
     public void updateBookByID(int ID, Book b) {
+
+        // Map applies the anonymous function to every element.
         booksList.stream().map(e -> {
             if (e.getID() == ID) {
                 e.setTitle(b.getTitle());
@@ -58,13 +70,13 @@ public class BookService {
                 e.setYear(b.getYear());
             }
             return e;
-        }).collect(Collectors.toList());
-
-        // booksList = booksList.stream().filter(e -> e.getID() !=
-        // ID).collect(Collectors.toList());
-        // booksList.add(b);
-        // return (Book) booksList.stream().filter(e -> e.getID() ==
-        // ID).findFirst().get();
+        }).collect(Collectors.toList());// this collects and converts to list.
 
     }
+    // booksList = booksList.stream().filter(e -> e.getID() !=
+    // ID).collect(Collectors.toList());
+    // booksList.add(b);
+    // return (Book) booksList.stream().filter(e -> e.getID() ==
+    // ID).findFirst().get();
+
 }
