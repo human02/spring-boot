@@ -24,3 +24,10 @@ POSTMAN Screenshots are below:
 ![image](https://user-images.githubusercontent.com/42168454/114492060-9c216500-9bcc-11eb-8e64-4d91933b2d1a.png)
 ![image](https://user-images.githubusercontent.com/42168454/114491948-641a2200-9bcc-11eb-903f-8dc149b27fdd.png)
 
+#
+#### 6) This screenshot shows ***PUT***```/book/18``` where 18 is the ID of the book to be updated.
+
+![image](https://user-images.githubusercontent.com/42168454/114493764-f839b880-9bcf-11eb-9234-bc4063afcc6c.png)
+![image](https://user-images.githubusercontent.com/42168454/114494026-772ef100-9bd0-11eb-904f-abec31d9a081.png)
+![image](https://user-images.githubusercontent.com/42168454/114494065-84e47680-9bd0-11eb-8929-7295a7f4dbdf.png)
+
