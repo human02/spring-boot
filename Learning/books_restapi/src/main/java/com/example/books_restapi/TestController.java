@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController // This is required for JSON data return
 // @Controller // Denotes that this is the controller class. Data not in JSON
@@ -67,6 +68,12 @@ public class TestController {
     public List deleteBook(@PathVariable("bookID") int ID) {
         this.bookService.deleteBookByID(ID);
         return this.bookService.getAllBooks();
+    }
+
+    @PutMapping(value = "book/{id}")
+    public void updateBook(@PathVariable("id") int id, @RequestBody Book b) {
+
+        this.bookService.updateBookByID(id, b);
     }
 
 }

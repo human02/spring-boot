@@ -47,4 +47,24 @@ public class BookService {
         // matching ID.
         booksList = booksList.stream().filter(e -> e.getID() != ID).collect(Collectors.toList());
     }
+
+    // update book
+    public void updateBookByID(int ID, Book b) {
+        booksList.stream().map(e -> {
+            if (e.getID() == ID) {
+                e.setTitle(b.getTitle());
+                e.setAuthor(b.getAuthor());
+                e.setCost(b.getCost());
+                e.setYear(b.getYear());
+            }
+            return e;
+        }).collect(Collectors.toList());
+
+        // booksList = booksList.stream().filter(e -> e.getID() !=
+        // ID).collect(Collectors.toList());
+        // booksList.add(b);
+        // return (Book) booksList.stream().filter(e -> e.getID() ==
+        // ID).findFirst().get();
+
+    }
 }
