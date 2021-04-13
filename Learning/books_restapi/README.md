@@ -18,3 +18,9 @@ POSTMAN Screenshots are below:
 #### 4) This screenshot shows ***Post***```/book``` input and output.
 ![image](https://user-images.githubusercontent.com/42168454/114489619-4ba80880-9bc8-11eb-84eb-d5bfe5c0e631.png)
 
+#
+#### 5) This screenshot shows ***DELETE***```/book/15``` where 15 is the ID of the book to be deleted.
+
+![image](https://user-images.githubusercontent.com/42168454/114492060-9c216500-9bcc-11eb-8e64-4d91933b2d1a.png)
+![image](https://user-images.githubusercontent.com/42168454/114491948-641a2200-9bcc-11eb-903f-8dc149b27fdd.png)
+
