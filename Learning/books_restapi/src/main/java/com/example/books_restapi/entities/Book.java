@@ -1,10 +1,28 @@
 package com.example.books_restapi.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+// hibernate configuration
+@Entity
+@Table(name = "books") // this will be the table name created in the database.
 public class Book {
+    @Id // makes it the primary key
+    @GeneratedValue(strategy = GenerationType.AUTO) // it auto increases the Id.
+    @Column(name = "Book_ID") // used to change the name of to the parameter.
     private int ID;
+
+    @Column(name = "Book_Title")
     private String title;
+    @Column(name = "Author")
     private String author;
+    @Column(name = "Price")
     private double cost;
+    @Column(name = "Publication_Year")
     private int year;
 
     public String getTitle() {

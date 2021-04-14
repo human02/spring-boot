@@ -96,15 +96,29 @@ public class TestController {
     @DeleteMapping("/book/{bookID}")
     // '?' can be used for generic, 'Void' can be used fro void return types.
     public ResponseEntity<?> deleteBook(@PathVariable("bookID") int ID) {
-        try {
-            boolean status = this.bookService.deleteBookByID(ID);
-            if (status) {
-                return ResponseEntity.ok().build();
+        if (ID == -1) {
+            try {
+
+                this.bookService.deleteAll();
+                return ResponseEntity.status(HttpStatus.OK).build();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
             }
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        } else {
+            try {
+                if (this.bookService.getBookByID(ID) == null) {
+                    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+                }
+                this.bookService.deleteBookByID(ID);
+
+                return ResponseEntity.ok().build();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            }
         }
     }
 
@@ -113,7 +127,7 @@ public class TestController {
     public ResponseEntity<?> updateBook(@PathVariable("id") int id, @RequestBody Book b) {
         try {
             this.bookService.updateBookByID(id, b);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.status(HttpStatus.OK).build();
 
         } catch (Exception e) {
             e.printStackTrace();
