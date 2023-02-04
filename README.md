@@ -9,5 +9,3 @@ This repo contains all the spring boot projects and code.
 
 - test: 
 - todo_webapp:
-
----
