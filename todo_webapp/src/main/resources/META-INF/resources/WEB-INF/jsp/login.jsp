@@ -4,6 +4,8 @@
 </head>
 <body>
 	Hello! Welcome to the Login page!
+	
+	<pre>${errorMessage}</pre>
 	<!--Using method as post as it wont reveal sensitive info in the URL  -->
 	<form method="post">
 		Name: <input name="name" type="text"> 
