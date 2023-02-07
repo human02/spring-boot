@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,9 +6,8 @@
 </head>
 <body>
 	<div>Hi ${name},</div>
-	<div>This is the welcome page!</div>
-	<div>:)</div>
-	
+	<div>This is the welcome page!</div>	
 	<div>Your Name is: ${name}</div>
+	<div>Click <a href="list">here</a> to manage your To-Do list.</div>
 </body>
 </html>
