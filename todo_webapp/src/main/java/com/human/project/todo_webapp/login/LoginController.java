@@ -1,12 +1,18 @@
 package com.human.project.todo_webapp.login;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class LoginController {
+	
 	@RequestMapping("/login")
-	public String loginPage() {
+	public String loginPage(@RequestParam String name, ModelMap model) {
+//		print not recommended for Prod
+		System.out.println("The name parameter passed via address is:" + " "+name);
+		model.put("name", ""+name);
 		return("login");
 	}
 }
