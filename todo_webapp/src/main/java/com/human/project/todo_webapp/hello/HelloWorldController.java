@@ -31,10 +31,9 @@ public class HelloWorldController {
 		
 	}
 	
-	//Add jsp page
+	//Add JSP page
 	@RequestMapping("say-hello-jsp")
-	@ResponseBody
 	public String sayHelloJSP() {
-		return("Welcome to the JSP Page ");
+		return("sayHello");
 	}
 }
