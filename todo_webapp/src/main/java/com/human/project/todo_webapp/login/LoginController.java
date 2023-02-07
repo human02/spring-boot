@@ -10,21 +10,34 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class LoginController {
-	
+
 	private Logger logger = LoggerFactory.getLogger(getClass());
-	
-	@RequestMapping(value="login",method = RequestMethod.GET)
+
+//	Created but not initiated and we can't use new keyword, best way to use constructor injection
+	private AuthenticationService authenticationResult;
+
+	public LoginController(AuthenticationService authenticationResult) {
+		super();
+		this.authenticationResult = authenticationResult;
+	}
+
+	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public String loginPage() {
 //		print not recommended for Prod
 //		System.out.println("The name parameter passed via address is:" + " "+name);		
-		return("login");
+		return ("login");
 	}
-	
-	@RequestMapping(value="login",method = RequestMethod.POST)
-	public String welcomePage(@RequestParam String name,@RequestParam String password, ModelMap model) {
-		model.put("name", name);
-		model.put("password", password);
-		logger.debug("Name passed by request Param = ",name);
-		return("welcomePage");
+
+	@RequestMapping(value = "login", method = RequestMethod.POST)
+	public String welcomePage(@RequestParam String name, @RequestParam String password, ModelMap model) {
+//		logger.debug("Name passed by request param = ",name);
+		if (authenticationResult.authenticate(name, password)) {
+			model.put("name", name);
+			model.put("password", password);
+			return ("welcomePage");
+		}
+
+		return ("login");
+
 	}
 }
