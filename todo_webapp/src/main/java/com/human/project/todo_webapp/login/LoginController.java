@@ -7,8 +7,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
+@SessionAttributes("name") // it will make names attribute persist across sessions. Also need to put in all
+							// controllers where we need to use this value
 public class LoginController {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
@@ -30,13 +33,14 @@ public class LoginController {
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String welcomePage(@RequestParam String name, @RequestParam String password, ModelMap model) {
-		logger.debug("Name passed by request param = ",name);
+		logger.debug("Name passed by request param = ", name);
 		if (authenticationResult.authenticate(name, password)) {
+//	anything put in model will be available for the scope of the request
 			model.put("name", name);
 			model.put("password", password);
 			return ("welcomePage");
 		}
-		model.put("errorMessage","Invalid Credentials! Please try Again..");
+		model.put("errorMessage", "Invalid Credentials! Please try Again..");
 		return ("login");
 
 	}

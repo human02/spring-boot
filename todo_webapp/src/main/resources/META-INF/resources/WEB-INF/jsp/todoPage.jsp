@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Welcome!</title>
+<title>Welcome! </title>
 </head>
 <body>
-	<div>This is the ToDos page!</div>
+	<div>Welcome ${name} -->This is the ToDos page!</div>
 	
 	<div>Your Name is: ${todos}</div>
 </body>
