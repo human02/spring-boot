@@ -23,14 +23,14 @@ public class LoginController {
 
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public String loginPage() {
+		logger.debug("Entered get page");
 //		print not recommended for Prod
-//		System.out.println("The name parameter passed via address is:" + " "+name);		
 		return ("login");
 	}
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String welcomePage(@RequestParam String name, @RequestParam String password, ModelMap model) {
-//		logger.debug("Name passed by request param = ",name);
+		logger.debug("Name passed by request param = ",name);
 		if (authenticationResult.authenticate(name, password)) {
 			model.put("name", name);
 			model.put("password", password);
