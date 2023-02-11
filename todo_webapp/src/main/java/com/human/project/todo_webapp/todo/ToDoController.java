@@ -8,6 +8,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import jakarta.validation.Valid;
@@ -49,4 +50,12 @@ public class ToDoController {
 		todoService.addToDo(username, todo.getDescription(), LocalDate.now().plusYears(1), false);
 		return "redirect:list-todos"; // redirect: redirects to a previous request mapping as mentioned in our case
 	}
+	
+	@RequestMapping(value = "delete-todo", method = RequestMethod.GET)
+	public String removeTodo(@RequestParam int id) {
+//		Delete to do with the specific ID and redirect it to the list todo page
+		todoService.deleteById(id);
+		return "redirect:list-todos";
+	}
+	
 }
