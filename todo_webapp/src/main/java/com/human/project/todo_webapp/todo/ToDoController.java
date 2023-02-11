@@ -47,7 +47,7 @@ public class ToDoController {
 			return "todo";
 		}
 		String username = (String) model.getAttribute("name");
-		todoService.addToDo(username, todo.getDescription(), LocalDate.now().plusYears(1), false);
+		todoService.addToDo(username, todo.getDescription(), todo.getTargetdate(), false);
 		return "redirect:list-todos"; // redirect: redirects to a previous request mapping as mentioned in our case
 	}
 
@@ -73,7 +73,6 @@ public class ToDoController {
 		}
 		String username = (String) model.getAttribute("name");
 		todo.setUsername(username);
-		todo.setTargetdate(LocalDate.now().plusYears(1));
 		todoService.update(todo);
 		return "redirect:list-todos";
 	}
