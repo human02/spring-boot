@@ -30,15 +30,17 @@ public class ToDoController {
 	}
 
 	@RequestMapping(value = "add-todo", method = RequestMethod.GET)
-	public String showNewToDoPage() {
-
+	public String showNewToDoPage(ModelMap model) {
+		String username = (String)model.getAttribute("name");
+		ToDo todo = new ToDo(0,username,"",LocalDate.now().plusYears(1),false);
+		model.put("todo", todo);
 		return "todo";
 	}
 
 	@RequestMapping(value = "add-todo", method = RequestMethod.POST)
-	public String addNewToDo(@RequestParam String description, ModelMap model) {
+	public String addNewToDo(ModelMap model, ToDo todo) {
 		String username = (String)model.getAttribute("name");
-		todoService.addToDo(username, description, LocalDate.now().plusYears(1), false);
+		todoService.addToDo(username, todo.getDescription(), LocalDate.now().plusYears(1), false);
 		return "redirect:list-todos"; // redirect: redirects to a previous request mapping as mentioned in our case
 	}
 }
