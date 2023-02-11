@@ -13,6 +13,7 @@
 		<form:form method="post" modelAttribute="todo">
 			 <form:input path="id" type="hidden"/> 
 			Description: <form:input path="description" required="required"/> 
+			<form:errors path="description" cssClass="text-warning"/>
 			 <form:input path="done" type="hidden"/> 
 			<!-- Above required prevents adding empty value but hackers can misuse it hence use server side validation -->
 			<input type="submit" class="btn btn-success"/>

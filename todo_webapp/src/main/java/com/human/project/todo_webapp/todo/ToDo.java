@@ -2,12 +2,14 @@ package com.human.project.todo_webapp.todo;
 
 import java.time.LocalDate;
 
+import jakarta.validation.constraints.Size;
+
 // its a bean to store all the ToDo details,
 // typically we need to store it in a database.
 // now we will do step by step: static list and later h2 database
-public class ToDo {
+public class Todo {
 
-	public ToDo(int id, String username, String description, LocalDate targetdate, boolean done) {
+	public Todo(int id, String username, String description, LocalDate targetdate, boolean done) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -18,6 +20,7 @@ public class ToDo {
 
 	private int id;
 	private String username;
+	@Size(min=10, message="Add atleast 10 characters")
 	private String description;
 	private LocalDate targetdate;
 	private boolean done;
