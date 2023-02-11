@@ -50,12 +50,32 @@ public class ToDoController {
 		todoService.addToDo(username, todo.getDescription(), LocalDate.now().plusYears(1), false);
 		return "redirect:list-todos"; // redirect: redirects to a previous request mapping as mentioned in our case
 	}
-	
+
 	@RequestMapping(value = "delete-todo", method = RequestMethod.GET)
 	public String removeTodo(@RequestParam int id) {
 //		Delete to do with the specific ID and redirect it to the list todo page
 		todoService.deleteById(id);
 		return "redirect:list-todos";
 	}
-	
+
+	@RequestMapping(value = "update-todo", method = RequestMethod.GET)
+	public String showToDoPage(@RequestParam int id, ModelMap model) {
+//		Delete to do with the specific ID and redirect it to the list todo page
+		Todo todo = todoService.findById(id);
+		model.addAttribute("todo", todo);
+		return "todo";
+	}
+
+	@RequestMapping(value = "update-todo", method = RequestMethod.POST)
+	public String updateToDo(ModelMap model, @Valid Todo todo, BindingResult result) {
+		if (result.hasErrors()) {
+			return "todo";
+		}
+		String username = (String) model.getAttribute("name");
+		todo.setUsername(username);
+		todo.setTargetdate(LocalDate.now().plusYears(1));
+		todoService.update(todo);
+		return "redirect:list-todos";
+	}
+
 }

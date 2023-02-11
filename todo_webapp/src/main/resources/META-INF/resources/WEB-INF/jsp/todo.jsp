@@ -10,6 +10,7 @@
 <body>
 	<div class="container">
 		<h1>Enter To-Do Details</h1>
+		<!-- Here we do model binding using spring tags -->
 		<form:form method="post" modelAttribute="todo">
 			 <form:input path="id" type="hidden"/> 
 			Description: <form:input path="description" required="required"/> 
