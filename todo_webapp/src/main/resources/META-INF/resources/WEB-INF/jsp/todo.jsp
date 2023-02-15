@@ -12,6 +12,7 @@
 
 </head>
 <body>
+	<%@ include file="common/navigation.jspf" %>
 	<div class="container">
 		<h1>Enter To-Do Details</h1>
 		<!-- Here we do model binding using spring tags -->
